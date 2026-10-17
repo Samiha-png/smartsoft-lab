@@ -6,12 +6,17 @@ import {
   Workflow, X,
 } from "lucide-react";
 
+// ─── COMPONENTS ──────────────────────────────────────────────
+import Reveal from "./components/Reveal";
+import Testimonials from "./components/Testimonials";
+import Staff from "./components/Staff";
+
+// ─── DATA (Removed 'testimonials' as it now comes from API) ──
 import {
   company,
   services as servicesData,
   projects as projectsData,
   projectFilters,
-  testimonials,
   techStack,
 } from "./data/site";
 
@@ -32,24 +37,6 @@ const process = [
   ["03", "Build", "We develop in focused stages, sharing progress and validating the details along the way."],
   ["04", "Launch & evolve", "We prepare for launch and help your product improve as your needs grow."],
 ];
-
-/* ──────────────────────────────────────────────────────────────
-   PRIMITIVES
-   ────────────────────────────────────────────────────────────── */
-function Reveal({ children, delay = 0, className = "" }) {
-  const reduce = useReducedMotion();
-  return (
-    <motion.div
-      className={className}
-      initial={reduce ? false : { opacity: 0, y: 24 }}
-      whileInView={{ opacity: 1, y: 0 }}
-      viewport={{ once: true, amount: 0.16 }}
-      transition={{ duration: 0.65, delay, ease: [0.22, 1, 0.36, 1] }}
-    >
-      {children}
-    </motion.div>
-  );
-}
 
 /* ──────────────────────────────────────────────────────────────
    AMBIENT BACKGROUND
@@ -91,7 +78,7 @@ function Ambient() {
 }
 
 /* ──────────────────────────────────────────────────────────────
-   HERO ORB — ambient animation for intro background
+   HERO ORB — ambient animation
    ────────────────────────────────────────────────────────────── */
 function Orb() {
   const reduce = useReducedMotion();
@@ -192,40 +179,6 @@ function ProjectVisual({ type }) {
 }
 
 /* ──────────────────────────────────────────────────────────────
-   TESTIMONIALS
-   ────────────────────────────────────────────────────────────── */
-function Testimonials() {
-  if (!testimonials.length) return null;
-  return (
-    <section className="testimonials-section section-shell" id="testimonials">
-      <Reveal>
-        <div className="section-label">
-          <span><i className="label-dot" />04 / TRUST</span>
-          <span>WHAT CLIENTS SAY</span>
-        </div>
-        <div className="section-heading">
-          <h2>Real words.<br /><span className="text-gradient">Real partnerships.</span></h2>
-          <p>Feedback from the people and teams we've built with.</p>
-        </div>
-      </Reveal>
-      <div className="testimonials-grid">
-        {testimonials.map((t, i) => (
-          <Reveal delay={i * 0.07} key={i}>
-            <figure className="testimonial-card">
-              <blockquote>"{t.quote}"</blockquote>
-              <figcaption>
-                <strong>{t.name}</strong>
-                <span>{t.role}</span>
-              </figcaption>
-            </figure>
-          </Reveal>
-        ))}
-      </div>
-    </section>
-  );
-}
-
-/* ──────────────────────────────────────────────────────────────
    APP
    ────────────────────────────────────────────────────────────── */
 export default function App() {
@@ -296,18 +249,17 @@ export default function App() {
       <main>
         {/* ── INTRO (ab page ka pehla section) ───────── */}
         <section className="intro-section section-shell" id="home">
-           {/* ── ORB BACKGROUND ── */}
-  <div className="intro-orb-bg" aria-hidden="true">
-    <Orb />
-  </div>
+          {/* ── ORB BACKGROUND ── */}
+          <div className="intro-orb-bg" aria-hidden="true">
+            <Orb />
+          </div>
 
-  <Reveal>
-    <div className="section-label">
-      <span><i className="label-dot" />01 / THE BIG PICTURE</span>
-      <span>IDEAS → IMPACT</span>
-    </div>
-  </Reveal>
-        
+          <Reveal>
+            <div className="section-label">
+              <span><i className="label-dot" />01 / THE BIG PICTURE</span>
+              <span>IDEAS → IMPACT</span>
+            </div>
+          </Reveal>
 
           <Reveal delay={0.08}>
             <div className="intro-hero">
@@ -503,7 +455,11 @@ export default function App() {
           </div>
         </section>
 
+        {/* ── TESTIMONIALS (API se aayenge) ── */}
         <Testimonials />
+
+        {/* ── STAFF (API se aayenge) ── */}
+        <Staff />
 
         {/* ── PRINCIPLES ─────────────────────────────── */}
         <section className="principles-section section-shell">
