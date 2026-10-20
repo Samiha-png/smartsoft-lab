@@ -27,8 +27,10 @@ export default function Testimonials() {
           <Reveal delay={i * 0.07} key={t.id}>
             <figure className="testimonial-card">
               <Quote size={20} className="testi-q" />
+              
               {/* Database column names auto-adjust */}
               <blockquote>"{t.content || t.quote || t.message || "Great experience working with them!"}"</blockquote>
+              
               <figcaption>
                 <strong>{t.client_name || t.name || "Client"}</strong>
                 <span>{t.designation || t.role || t.company || "Verified Client"}</span>

@@ -78,7 +78,7 @@ function Ambient() {
 }
 
 /* ──────────────────────────────────────────────────────────────
-   HERO ORB — ambient animation for intro background
+   HERO ORB — ambient animation
    ────────────────────────────────────────────────────────────── */
 function Orb() {
   const reduce = useReducedMotion();

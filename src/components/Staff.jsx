@@ -1,6 +1,6 @@
 import React from "react";
 import { Linkedin, Github, User } from "lucide-react";
-import Reveal from "./Reveal.jsx"; // Path fixed here
+import Reveal from "./Reveal";
 import { useApi } from "../hooks/useApi";
 
 export default function Staff() {
@@ -27,8 +27,17 @@ export default function Staff() {
           <Reveal delay={i * 0.06} key={s.id}>
             <article className="staff-card">
               <div className="staff-avatar">
+                {/* Database image column auto-adjust */}
                 {s.image || s.photo || s.avatar || s.avatar_url ? (
-                  <img src={s.image || s.photo || s.avatar || s.avatar_url} alt={s.name} loading="lazy" />
+                  <img 
+                    src={s.image || s.photo || s.avatar || s.avatar_url} 
+                    alt={s.name} 
+                    loading="lazy"
+                    onError={(e) => {
+                      e.currentTarget.style.display = "none";
+                      e.currentTarget.parentElement.classList.add("staff-avatar-fallback");
+                    }}
+                  />
                 ) : (
                   <User size={32} strokeWidth={1.2} />
                 )}

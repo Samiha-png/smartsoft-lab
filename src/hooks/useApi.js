@@ -1,6 +1,7 @@
+// src/hooks/useApi.js
 import { useEffect, useState } from "react";
 
-// ⚠️ APNI LIVE WEBSITE KA URL YAHAN DAALEIN
+// ⚠️ Yahan apna local PHP link dalein
 const API_BASE_URL = "http://localhost/admin-panal/api/public.php";
 
 export function useApi(action) {
